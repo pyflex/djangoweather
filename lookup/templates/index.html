@@ -4,8 +4,57 @@
 {% block title %}Hello{% endblock %}
 
 {% block content %}
+    <style>
+        .good {
+            background-color: #00CC00;
+        }
+
+        .moderate {
+            background-color: #FFFF00;
+        }
+
+        .usg {
+            background-color: #FF6600;
+        }
+
+        .unhealthy {
+            background-color: #FF0000;
+        }
+
+        .very-unhealthy {
+            background-color: #99004C;
+        }
+
+        .hazardarous {
+            background-color: #7E0023;
+        }
+
+        .color-font {
+            color: white;
+        }
+
+    </style>
+
+
     <div class="container">
-        <h1>Hello</h1>
+        <h1>Check your air quality with this website!</h1>
+
+        {% if api %}
+            {% if api == "Error..." %}
+                <p>There was an error. Please try agian...</p>
+            {% else %}
+
+                <div class="jumbotron {{ class_name }} color-font">
+                    <h1 class="display-4">{{ api.0.Category.Name }}</h1>
+                    <p class="lead">Air quality in {{ api.0.ReportingArea }}: {{ api.0.AQI }}</p>
+                    <p>{{ text }}</p>
+                </div>
+
+            {% endif %}
+
+        {% endif %}
+
+
     </div>
     
 {% endblock %}
